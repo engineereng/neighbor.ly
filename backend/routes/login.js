@@ -1,4 +1,5 @@
 var express = require('express');
+var admin = require("../admin");
 
 // Add the Firebase products that you want to use
 require("firebase/auth");
@@ -8,20 +9,23 @@ var router = express.Router();
 const createUser = async (req, res) => {
   const {
     email,
-    phoneNumber,
     password,
     firstName,
     lastName
   } = req.body;
 
-  const user = await admin.auth().createUser({
-    email,
-    phoneNumber,
-    password,
-    displayName: `${firstName} ${lastName}`
-  });
-
-  return res.send(user);
+  try {
+    const user = await admin.auth().createUser({
+      email,
+      password,
+      displayName: `${firstName} ${lastName}`
+    });
+  
+    return res.send(user);
+  }
+  catch (error) {
+    return res.status(400).send("Cannot create a user");
+  }
 }
 
 router.post('/signup', createUser);

@@ -14,7 +14,7 @@ const port = process.env.PORT || 5000;
 // cors middleware
 app.use(cors());
 app.use(express.json()); // parse json
-app.use('login', login);
+app.use('/login', login);
 
 const uri = process.env.MONGODB_KEY;
 // need these flags to deal with things that mongoDB has deprecated
