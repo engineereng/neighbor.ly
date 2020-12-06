@@ -49,11 +49,41 @@ router.route('/add').post((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
-// GET TASK
+// GET TASK BY ID
 router.route('/:id').get((req, res) => {
     console.log('You are on /:id');
     Task.findById(req.params.id)
         .then(task => res.json(task))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
+// GET TASKS BY USER
+router.route('/user/:user').get((req, res) => {
+    console.log('You are on /user/:user');
+    Task.find({
+            taskRequester: req.params.user
+        })
+        .then(tasksReq => {
+            Task.find({
+                    taskDoer: req.params.user
+                })
+                .then(tasksDo => {
+                    const ans = tasksReq.concat(tasksDo);
+                    res.json(ans);
+                })
+                .catch(err => res.status(400).json('Error: ' + err))
+        })
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
+// GET COMPLETED TASKS BY USER
+router.route('/done/:user').get((req, res) => {
+    console.log('You are on /done/:user');
+    Task.find({
+            status: 'DONE',
+            taskDoer: req.params.user,
+        })
+        .then(tasks => res.json(tasks))
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
@@ -77,6 +107,13 @@ router.route('/update/:id').post((req, res) => {
                 .then(() => res.json('Task updated!'))
                 .catch(err => res.status(400).json('Error: ' + err));
         })
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
+// DELETE TASK BY ID
+router.route('/:id').delete((req, res) => {
+    Task.findByIdAndDelete(req.params.id)
+        .then(() => res.json('Task deleted!'))
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
