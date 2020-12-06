@@ -25,8 +25,8 @@ connection.once('open', () => {
     console.log("MongoDB connection established successfully!");
 });
 
-// require and use files
-// const mapRouter = require('./routes/map');
+const taskRouter = require('./routes/tasks');
+app.use('/tasks', taskRouter);
 
 // starts server
 app.listen(port, () => {
