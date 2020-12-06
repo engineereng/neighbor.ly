@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "antd": "^4.9.1",
+    "firebase": "^8.1.2",
     "next": "^10.0.0",
     "react": "16.13.1",
     "react-dom": "16.13.1"
