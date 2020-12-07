@@ -3,7 +3,7 @@ let Task = require('../models/task.model');
 const checkIfAuthenticated = require('../admin').checkIfAuthenticated;
 
 // GET ALL TASKS
-router.get('/', checkIfAuthenticated, (req, res) => {
+router.get('/', (req, res) => {
     console.log('You are on /tasks');
     Task.find()
         .then(tasks => res.json(tasks))
@@ -53,16 +53,18 @@ router.post('/add', (req, res) => {
 });
 
 // GET TASK BY ID
-router.get('/:id', checkIfAuthenticated, (req, res) => {
+router.get('/:id', (req, res) => {
     console.log('You are on /:id');
+    console.log(req.params.id);
     Task.findById(req.params.id)
         .then(task => res.json(task))
-        .catch(err => res.status(400).json('Error: ' + err));
+        .catch(err => {console.log(err); res.status(400).json('Error: ' + err)});
 });
 
 // GET TASKS BY USER
 router.get('/user/:user', (req, res) => {
     console.log('You are on /user/:user');
+    console.log(req.params.user);
     Task.find({
             requesterID: req.params.user
         })
@@ -80,7 +82,7 @@ router.get('/user/:user', (req, res) => {
 });
 
 // GET COMPLETED TASKS BY USER
-router.get('/done/:user', checkIfAuthenticated, (req, res) => {
+router.get('/done/:user', (req, res) => {
     console.log('You are on /done/:user');
     Task.find({
             status: 'DONE',
@@ -97,7 +99,7 @@ router.get('/done/:user', checkIfAuthenticated, (req, res) => {
     taskDoer: 'user100',
 }
 */
-router.post('/update/:id', checkIfAuthenticated, (req, res) => {
+router.post('/update/:id', (req, res) => {
     console.log('You are on /update/:id');
     Task.findById(req.params.id)
         .then(task => {
@@ -114,7 +116,7 @@ router.post('/update/:id', checkIfAuthenticated, (req, res) => {
 });
 
 // DELETE TASK BY ID
-router.delete('/:id', checkIfAuthenticated, (req, res) => {
+router.delete('/:id', (req, res) => {
     Task.findByIdAndDelete(req.params.id)
         .then(() => res.json('Task deleted!'))
         .catch(err => res.status(400).json('Error: ' + err));
