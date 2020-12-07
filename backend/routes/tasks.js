@@ -1,8 +1,9 @@
 const router = require('express').Router();
 let Task = require('../models/task.model');
+const checkIfAuthenticated = require('../admin').checkIfAuthenticated;
 
 // GET ALL TASKS
-router.route('/').get((req, res) => {
+router.get('/', checkIfAuthenticated, (req, res) => {
     console.log('You are on /tasks');
     Task.find()
         .then(tasks => res.json(tasks))
@@ -20,7 +21,7 @@ router.route('/').get((req, res) => {
     endLoc: [120, 90],  // mary's house
 }
 */
-router.route('/add').post((req, res) => {
+router.post('/add', checkIfAuthenticated, (req, res) => {
     console.log('You are on /add');
     // required
     const taskRequester = req.body.taskRequester;
@@ -50,7 +51,7 @@ router.route('/add').post((req, res) => {
 });
 
 // GET TASK BY ID
-router.route('/:id').get((req, res) => {
+router.get('/:id', checkIfAuthenticated, (req, res) => {
     console.log('You are on /:id');
     Task.findById(req.params.id)
         .then(task => res.json(task))
@@ -58,7 +59,7 @@ router.route('/:id').get((req, res) => {
 });
 
 // GET TASKS BY USER
-router.route('/user/:user').get((req, res) => {
+router.get('/user/:user', checkIfAuthenticated, (req, res) => {
     console.log('You are on /user/:user');
     Task.find({
             taskRequester: req.params.user
@@ -77,7 +78,7 @@ router.route('/user/:user').get((req, res) => {
 });
 
 // GET COMPLETED TASKS BY USER
-router.route('/done/:user').get((req, res) => {
+router.get('/done/:user', checkIfAuthenticated, (req, res) => {
     console.log('You are on /done/:user');
     Task.find({
             status: 'DONE',
@@ -94,7 +95,7 @@ router.route('/done/:user').get((req, res) => {
     taskDoer: 'user100',
 }
 */
-router.route('/update/:id').post((req, res) => {
+router.post('/update/:id', checkIfAuthenticated, (req, res) => {
     console.log('You are on /update/:id');
     Task.findById(req.params.id)
         .then(task => {
@@ -111,7 +112,7 @@ router.route('/update/:id').post((req, res) => {
 });
 
 // DELETE TASK BY ID
-router.route('/:id').delete((req, res) => {
+router.delete('/:id', checkIfAuthenticated, (req, res) => {
     Task.findByIdAndDelete(req.params.id)
         .then(() => res.json('Task deleted!'))
         .catch(err => res.status(400).json('Error: ' + err));

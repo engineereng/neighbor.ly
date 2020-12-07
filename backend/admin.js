@@ -40,4 +40,5 @@ const checkIfAuthenticated = (req, res, next) => {
   });
 };
 
-module.exports = admin;
+module.exports.admin = admin;
+module.exports.checkIfAuthenticated = checkIfAuthenticated;
