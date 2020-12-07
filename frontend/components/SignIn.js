@@ -1,4 +1,5 @@
 import { Form, Input, Button, Checkbox } from 'antd';
+import {auth} from '../util/firebase';
 
 const layout = {
   labelCol: { span: 8 },
@@ -8,9 +9,26 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
 
+<<<<<<< HEAD
+=======
+const formStyle = {
+    fontSize: '2em',
+}
+
+>>>>>>> fb2a8b0c5e732ebb0ab90eff85dad456fec8689c
 const SignIn = () => {
-  const onFinish = values => {
-    console.log('Success:', values);
+  const onFinish = async ({username, password}) => {
+    try {
+      const result = await auth().signInWithEmailAndPassword(username, password);
+      console.log(result);
+
+      const token = await auth().currentUser.getIdToken();
+      console.log(token);
+      return result;
+    } 
+    catch (error) {
+      console.log(error);
+    }
   };
   
   const onFinishFailed = errorInfo => {
