@@ -18,6 +18,9 @@ const SignIn = () => {
     try {
       const result = await auth().signInWithEmailAndPassword(username, password);
       console.log(result);
+
+      const token = await auth().currentUser.getIdToken();
+      console.log(token);
       return result;
     } 
     catch (error) {
