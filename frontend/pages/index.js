@@ -1,11 +1,13 @@
 import Head from 'next/head'
-import Sidebar from '../components/Sidebar'
+import Sidebar from '../components/MainPage/Sidebar'
+import NavBar from '../components/MainPage/NavBar'
+import MapContainer from '../components/MainPage/MapContainer'
 
 export default function Home() {
   return (
     <div className="container">
       <Head>
-        <title>Create Next App</title>
+        <title>neighbor.ly</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -15,7 +17,7 @@ export default function Home() {
         <Sidebar />
       </main>
 
-      <style jsx>{`
+      {/* <style jsx>{`
         .foo {
           text-align:left;
         }
@@ -163,7 +165,7 @@ export default function Home() {
         * {
           box-sizing: border-box;
         }
-      `}</style>
+      `}</style> */}
     </div>
   )
 }

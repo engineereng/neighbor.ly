@@ -1,8 +1,6 @@
 import React from 'react'
 import { GoogleMap, LoadScript } from '@react-google-maps/api';
  
-require('dotenv-flow').config();
-
 // Taken from https://www.npmjs.com/package/@react-google-maps/api
 const containerStyle = {
   width: '400px',
@@ -10,8 +8,8 @@ const containerStyle = {
 };
  
 const center = {
-  lat: 40.712,
-  lng: 74.007
+  lat: -34.397,
+  lng: 150.644
 };
  
 function MapContainer() {
@@ -29,7 +27,7 @@ function MapContainer() {
  
   return (
     <LoadScript
-      googleMapsApiKey={process.env.GOOGLE_MAPS_KEY}
+      googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY}
     >
       <GoogleMap
         mapContainerStyle={containerStyle}
