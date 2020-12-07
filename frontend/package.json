@@ -10,12 +10,10 @@
   "dependencies": {
     "@react-google-maps/api": "^1.13.0",
     "antd": "^4.9.1",
-<<<<<<< HEAD
-    "firebase": "^8.1.2",
-=======
+    "axios": "^0.21.0",
     "dotenv": "^8.2.0",
     "dotenv-flow": "^3.2.0",
->>>>>>> fb2a8b0c5e732ebb0ab90eff85dad456fec8689c
+    "firebase": "^8.1.2",
     "next": "^10.0.0",
     "react": "16.13.1",
     "react-dom": "16.13.1"

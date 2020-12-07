@@ -21,7 +21,7 @@ router.get('/', checkIfAuthenticated, (req, res) => {
     endLoc: [120, 90],  // mary's house
 }
 */
-router.post('/add', checkIfAuthenticated, (req, res) => {
+router.post('/add', (req, res) => {
     console.log('You are on /add');
     // required
     const taskRequester = req.body.taskRequester;
@@ -30,11 +30,13 @@ router.post('/add', checkIfAuthenticated, (req, res) => {
     const dueDate = req.body.dueDate;
     const startLoc = req.body.startLoc;
     const endLoc = req.body.endLoc;
+    const requesterID = req.body.requesterID;
     console.log(req.body.description);
     // optional
     const description = ('description' in req.body) ? req.body.description : null;
 
     const newTask = new Task({
+        requesterID: requesterID,
         taskRequester: taskRequester,
         taskDoer: null,
         status: status,
@@ -59,10 +61,10 @@ router.get('/:id', checkIfAuthenticated, (req, res) => {
 });
 
 // GET TASKS BY USER
-router.get('/user/:user', checkIfAuthenticated, (req, res) => {
+router.get('/user/:user', (req, res) => {
     console.log('You are on /user/:user');
     Task.find({
-            taskRequester: req.params.user
+            requesterID: req.params.user
         })
         .then(tasksReq => {
             Task.find({
