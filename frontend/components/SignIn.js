@@ -8,11 +8,6 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
 
-const formStyle = {
-    fontSize: '2em',
-    
-}
-
 const SignIn = () => {
   const onFinish = values => {
     console.log('Success:', values);

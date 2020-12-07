@@ -14,6 +14,16 @@ export default function Home() {
        <SignIn />
     </div>
 
+    <style jsx>{`
+        #signIn {
+            width: 15%;
+            margin: auto;
+            margin-top: 25%;
+            transform: scale(1.5);
+        }
+
+
+    `}</style>
       <style jsx global>{`
         html,
         body {
