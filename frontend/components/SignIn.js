@@ -9,10 +9,13 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
 
+<<<<<<< HEAD
+=======
 const formStyle = {
     fontSize: '2em',
 }
 
+>>>>>>> fb2a8b0c5e732ebb0ab90eff85dad456fec8689c
 const SignIn = () => {
   const onFinish = async ({username, password}) => {
     try {
